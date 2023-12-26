@@ -1,0 +1,118 @@
+export const GENRES = [
+  {
+    title: "Action",
+    subtitle: "the protagonist is thrust into a series of events that typically involve violence and physical feats.",
+    href: "/",
+  },
+  {
+    title: "Adventure",
+    subtitle: "the protagonist goes on a journey, either physical or emotional.",
+    href: "/",
+  },
+  {
+    title: "Comedy",
+    subtitle: "the protagonist and others intend to entertain the audience through laughter and humor.",
+    href: "/",
+  },
+  {
+    title: "Drama",
+    subtitle: "the protagonist deals with a crisis, or sometimes a series of crises.",
+    href: "/",
+  },
+  {
+    title: "Fantasy",
+    subtitle: "the protagonist is thrust into a fantasy world and must accept their destiny.",
+    href: "/",
+  },
+  {
+    title: "Horror",
+    subtitle: "the protagonist’s life is placed in jeopardy or she or he must escape a terrifying situation.",
+    href: "/",
+  },
+  {
+    title: "Mystery",
+    subtitle: "the protagonist is tasked with solving a mystery.",
+    href: "/",
+  },
+  {
+    title: "Thriller",
+    subtitle: "the protagonist must thwart a threat against society.",
+    href: "/",
+  },
+];
+
+
+export const SCRIPTS = [
+  {
+    title: "The Matrix",
+    subtitle: "1999",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix",
+    genre: ["Action"],
+    date: "March 31, 1999",
+    draftNumber: 1,
+  },
+  {
+    title: "The Matrix Reloaded",
+    subtitle: "2003",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-reloaded",
+    genre: ["Action"],
+    date: "May 7, 2003",
+    draftNumber: 2,
+  },
+  {
+    title: "The Matrix Revolutions",
+    subtitle: "2003",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-revolutions",
+    genre: ["Action"],
+    date: "November 5, 2003",
+    draftNumber: 3,
+  },
+  {
+    title: "The Matrix 4",
+    subtitle: "2021",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-4",
+    genre: ["Action"],
+    date: "December 22, 2021",
+    draftNumber: 4,
+  },
+  {
+    title: "The Matrix 5",
+    subtitle: "2022",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-5",
+    genre: ["Action"],
+    date: "December 22, 2022",
+    draftNumber: 5,
+  },
+  {
+    title: "The Matrix 6",
+    subtitle: "2023",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-6",
+    genre: ["Action"],
+    date: "December 22, 2023",
+    draftNumber: 6,
+  },
+  {
+    title: "The Matrix 7",
+    subtitle: "2024",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-7",
+    genre: ["Action"],
+    date: "December 22, 2024",
+    draftNumber: 7,
+  },
+  {
+    title: "The Matrix 8",
+    subtitle: "2025",
+    writtenBy: "The Wachowskis",
+    href: "/the-matrix-8",
+    genre: ["Action"],
+    date: "December 22, 2025",
+    draftNumber: 8,
+  },
+];
