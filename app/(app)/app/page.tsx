@@ -1,48 +1,65 @@
-import PublishScript from "@/components/publish-script";
-import { PublishedScripts } from "@/components/published-scripts";
-import Image from "next/image";
+import Text from "@/components/text";
+import { GENRES, SCRIPTS } from "@/config/dashboard";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
+import { Courier_Prime } from "next/font/google";
 
-const NoScriptsFound = () => (
-  <div className="container my-10 grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
-    <div className="col-span-3 flex flex-col items-center justify-center rounded-md border border-gray-200 bg-white py-12">
-      <h2 className="z-10 text-xl font-semibold text-gray-700">
-        You haven&apos;t published any scripts yet!
-      </h2>
-      <Image
-        alt="No links yet"
-        loading="lazy"
-        width="400"
-        height="400"
-        decoding="async"
-        data-nimg="1"
-        className="blur-0 pointer-events-none -my-8"
-        src="https://app.dub.co/_static/illustrations/shopping-call.svg"
-        style={{ color: "transparent" }}
-      />
-      <PublishScript />
-      <p className="mt-3 text-sm font-medium text-gray-500 transition-all hover:text-gray-800 active:scale-95">
-        Publish your script on marketplace now
-      </p>
-    </div>
-  </div>
-);
+const courierPrime = Courier_Prime({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export default async function AppPage() {
   return (
-    <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden bg-gray-50">
-      <div className="flex h-36 items-center border-b border-gray-200 bg-white">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl text-gray-600">My Scripts</h1>
-            <PublishScript />
-          </div>
+    <div className="">
+      <section className="mt-32 container flex flex-col gap-4">
+        <Text>Genres</Text>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+          {GENRES.map((o, index) => (
+            <Link
+              href={`#${o.title.toLowerCase()}`}
+              key={index}
+              className="border p-8 h-56 bg-white rounded-xl shadow-2xl hover:shadow-md transition duration-500 ease-in-out"
+            >
+              <Text>{o?.title ?? "Genre"}</Text>
+            </Link>
+          ))}
         </div>
-      </div>
-
-      {false ? <NoScriptsFound /> : <PublishedScripts />}
-
-      <div className="container"></div>
+      </section>
+      {GENRES.map((o, index) => (
+        <section
+          id={o.title.toLowerCase()}
+          key={index}
+          className="container scroll-m-24 flex flex-col mt-36 mb-16"
+        >
+          <Text className="text-3xl font-bold tracking-tighter uppercase">
+            {o.title}
+          </Text>
+          <Text className="text-xl text-slate-500 mt-2">{o.subtitle}</Text>
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8">
+            {SCRIPTS.slice(0, 3).map((s, index) => (
+              <li key={index} className={cn(courierPrime.className)}>
+                <Link href={`/`}>
+                  <div className="bg-white shadow-2xl hover:shadow-md transition duration-500 ease-in-out flex flex-row border rounded h-[36rem]">
+                    <div className="flex-1 flex flex-col items-center justify-center ">
+                      <Text className="text-xl font-black uppercase text-center">
+                        {s?.title}
+                      </Text>
+                      <Text className="mt-12 text-xl uppercase text-center">
+                        written by
+                      </Text>
+                      <Text className="text-xl font-black uppercase text-center">
+                        {s?.writtenBy}
+                      </Text>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </div>
   );
 }

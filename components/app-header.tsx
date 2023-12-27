@@ -43,11 +43,13 @@ const AppHeader = () => {
               <DropdownMenuContent className="w-56" align="end">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <Link href="/app">
+                <Link href="/app/writer/scripts">
                   <DropdownMenuItem className="cursor-pointer">Scripts</DropdownMenuItem>
                 </Link>
                 <DropdownMenuItem>Earnings</DropdownMenuItem>
-                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <Link href="/app/writer/profile">
+                <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+                </Link>
                 <DropdownMenuSeparator />
                 <SignOutButton>
                   <DropdownMenuItem className="cursor-pointer">

@@ -6,7 +6,7 @@ const AppFooter = () => {
   return (
     <footer className="border-t bg-background">
       <div className="container flex flex-col justify-between">
-        <div className="py-8">
+        <div className="py-4">
           <Link href="/">
             <Text className="text-2xl tracking-tighter uppercase font-black">
               Mannat
