@@ -29,7 +29,13 @@ const UserMenu = () => {
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <Link href="/app">
+            <DropdownMenuItem className="cursor-pointer">
+              Marketplace
+            </DropdownMenuItem>
+          </Link>
+        <DropdownMenuSeparator />
+          {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
           <DropdownMenuSeparator />
           <Link href="/app/writer/scripts">
             <DropdownMenuItem className="cursor-pointer">

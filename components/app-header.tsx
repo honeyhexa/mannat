@@ -26,11 +26,20 @@ const AppHeader = () => {
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div>
-          <Link href="/">
-            <Text className="text-2xl tracking-tighter uppercase font-black">
-              Mannat
-            </Text>
-          </Link>
+          <SignedIn>
+            <Link href="/app">
+              <Text className="text-2xl tracking-tighter uppercase font-black">
+                Mannat
+              </Text>
+            </Link>
+          </SignedIn>
+          <SignedOut>
+            <Link href="/">
+              <Text className="text-2xl tracking-tighter uppercase font-black">
+                Mannat
+              </Text>
+            </Link>
+          </SignedOut>
         </div>
         <div>
           <UserMenu />
