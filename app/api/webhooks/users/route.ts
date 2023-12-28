@@ -132,9 +132,29 @@ export async function POST(
         status: 400,
       })
     }
-    console.log("doing something")
+
+    try {
+      const res = await fetch(`/api/authors/${id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          user_name: emailObject?.email_address?.split?.("@")?.[0] ?? emailObject?.email_address,
+          full_name: `${evt.data.first_name} ${evt.data.last_name}`,
+          email: emailObject.email_address,
+        }),
+      });
+      console.log(await res.json());
+    } catch(error) {
+      console.error(error);
+      return new Response("Error inserting user", {
+        status: 400,
+      })
+    } finally {
+      console.log(`User ${id} was ${eventType}`);
+    }
   }
-  console.log(`User ${id} was ${eventType}`);
   return new Response("", {
     status: 201,
   })

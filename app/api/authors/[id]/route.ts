@@ -45,7 +45,7 @@ export async function POST(
   try {
     let { data, error } = await supabase
       .from(TABLE_NAME)
-      .upsert({ id: user?.id, ...(await request.json()) })
+      .insert({ id, ...(await request.json()) })
       .select();
     console.log(data, error);
     return new Response(JSON.stringify(data));

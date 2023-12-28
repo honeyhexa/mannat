@@ -67,7 +67,7 @@ export default function ProfileForm() {
     console.log(values);
 
     fetch(`/api/authors/${user?.id}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
