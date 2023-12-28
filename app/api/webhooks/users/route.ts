@@ -5,38 +5,38 @@
 // export async function GET(req: Request) {
 //   return new Response('', { status: 200 });
 // }
- 
+
 // export async function POST(req: Request) {
- 
+
 //   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
 //   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
- 
+
 //   if (!WEBHOOK_SECRET) {
 //     throw new Error('Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local')
 //   }
- 
+
 //   // Get the headers
 //   const headerPayload = headers();
 //   const svix_id = headerPayload.get("svix-id");
 //   const svix_timestamp = headerPayload.get("svix-timestamp");
 //   const svix_signature = headerPayload.get("svix-signature");
- 
+
 //   // If there are no headers, error out
 //   if (!svix_id || !svix_timestamp || !svix_signature) {
 //     return new Response('Error occured -- no svix headers', {
 //       status: 400
 //     })
 //   }
- 
+
 //   // Get the body
 //   const payload = await req.json()
 //   const body = JSON.stringify(payload);
- 
+
 //   // Create a new Svix instance with your secret.
 //   const wh = new Webhook(WEBHOOK_SECRET);
- 
+
 //   let evt: WebhookEvent
- 
+
 //   // Verify the payload with the headers
 //   try {
 //     evt = wh.verify(body, {
@@ -50,17 +50,16 @@
 //       status: 400
 //     })
 //   }
- 
+
 //   // Get the ID and type
 //   const { id } = evt.data;
 //   const eventType = evt.type;
- 
+
 //   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
 //   console.log('Webhook body:', body)
- 
+
 //   return new Response('', { status: 200 })
 // }
-
 
 //ignore typescript
 // @ts-nocheck
@@ -68,7 +67,19 @@ import type { User } from "@clerk/nextjs/api";
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 
-type UnwantedKeys = "emailAddresses" | "firstName" | "lastName" | "primaryEmailAddressId" | "primaryPhoneNumberId" | "phoneNumbers";
+const supabaseUrl = process.env.SUPABASE_URL ?? "";
+const supabaseKey = process.env.SUPABASE_ANON_KEY ?? "";
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const TABLE_NAME = "Authors";
+
+type UnwantedKeys =
+  | "emailAddresses"
+  | "firstName"
+  | "lastName"
+  | "primaryEmailAddressId"
+  | "primaryPhoneNumberId"
+  | "phoneNumbers";
 
 interface UserInterface extends Omit<User, UnwantedKeys> {
   email_addresses: {
@@ -87,22 +98,20 @@ interface UserInterface extends Omit<User, UnwantedKeys> {
 
 const webhookSecret: string = process.env.WEBHOOK_SECRET || "";
 
-export async function POST(
-  req
-) {
-  const payload = await req.json()
+export async function POST(req) {
+  const payload = await req.json();
   const payloadString = JSON.stringify(payload);
   const headerPayload = headers();
   const svixId = headerPayload.get("svix-id");
   const svixIdTimeStamp = headerPayload.get("svix-timestamp");
   const svixSignature = headerPayload.get("svix-signature");
   if (!svixId || !svixIdTimeStamp || !svixSignature) {
-    console.log("svixId", svixId)
-    console.log("svixIdTimeStamp", svixIdTimeStamp)
-    console.log("svixSignature", svixSignature)
+    console.log("svixId", svixId);
+    console.log("svixIdTimeStamp", svixIdTimeStamp);
+    console.log("svixSignature", svixSignature);
     return new Response("Error occured", {
       status: 400,
-    })
+    });
   }
   const svixHeaders = {
     "svix-id": svixId,
@@ -114,10 +123,10 @@ export async function POST(
   try {
     evt = wh.verify(payloadString, svixHeaders) as Event;
   } catch (_) {
-    console.log("error")
+    console.log("error");
     return new Response("Error occured", {
       status: 400,
-    })
+    });
   }
   const { id } = evt.data;
   // Handle the webhook
@@ -130,36 +139,34 @@ export async function POST(
     if (!emailObject) {
       return new Response("Error locating user", {
         status: 400,
-      })
+      });
     }
 
     try {
-      const res = await fetch(`/api/authors/${id}`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          user_name: emailObject?.email_address?.split?.("@")?.[0] ?? emailObject?.email_address,
+      let { data, error } = await supabase
+        .from(TABLE_NAME)
+        .insert({
+          id,
+          user_name:
+            emailObject?.email_address?.split?.("@")?.[0] ??
+            emailObject?.email_address,
           full_name: `${evt.data.first_name} ${evt.data.last_name}`,
           email: emailObject.email_address,
-        }),
-      });
-      console.log(await res.json());
-    } catch(error) {
-      console.error(error);
-      return new Response("Error inserting user", {
-        status: 400,
-      })
+        })
+        .select();
+      console.log(data, error);
+      return new Response(JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+      return new Response(JSON.stringify({ error: "error" }));
     } finally {
       console.log(`User ${id} was ${eventType}`);
     }
   }
   return new Response("", {
     status: 201,
-  })
+  });
 }
-
 
 type Event = {
   data: UserInterface;
