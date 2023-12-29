@@ -36,7 +36,7 @@ const UserMenu = () => {
           </Link>
         <DropdownMenuSeparator />
           {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
-          <DropdownMenuSeparator />
+          {/* <DropdownMenuSeparator /> */}
           <Link href="/app/writer/scripts">
             <DropdownMenuItem className="cursor-pointer">
               Scripts

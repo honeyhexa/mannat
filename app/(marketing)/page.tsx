@@ -1,65 +1,38 @@
-import Text from "@/components/text";
-import { GENRES, SCRIPTS } from "@/config/dashboard";
-import Link from "next/link";
+import { FasterSmarterBeautifulBento } from "@/components/first-section";
+import { Hero } from "@/components/hero-section";
+import { ShareConnectPaidWidgetBento } from "@/components/second-section";
+import { OpenBuildTemplateBento } from "@/components/third-section";
 import { cn } from "@/lib/utils";
+import { Caveat } from "next/font/google";
 
-import { Courier_Prime } from "next/font/google";
+export const revalidate = 600;
 
-const courierPrime = Courier_Prime({
+const fontCaveat = Caveat({
+  weight: ["500"],
   subsets: ["latin"],
-  weight: "400",
+  display: "swap",
+  variable: "--font-caveat",
 });
 
-export default async function WebPage() {
+export default async function IndexPage() {
+  // const starCount = await fetch('https://api.github.com/repos/documenso/documenso', {
+  //   headers: {
+  //     accept: 'application/vnd.github.v3+json',
+  //   },
+  // })
+  //   .then(async (res) => res.json())
+  //   .then((res) => (typeof res.stargazers_count === 'number' ? res.stargazers_count : undefined))
+  //   .catch(() => undefined);
+
   return (
-    <div className="">
-      <section className="mt-32 container flex flex-col gap-4">
-        <Text>Genres</Text>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
-          {GENRES.map((o, index) => (
-            <Link
-              href={`#${o.title.toLowerCase()}`}
-              key={index}
-              className="border p-8 h-56 bg-white rounded-xl shadow-2xl hover:shadow-md transition duration-500 ease-in-out"
-            >
-              <Text>{o?.title ?? "Genre"}</Text>
-            </Link>
-          ))}
-        </div>
-      </section>
-      {GENRES.map((o, index) => (
-        <section
-          id={o.title.toLowerCase()}
-          key={index}
-          className="container scroll-m-24 flex flex-col mt-36 mb-16"
-        >
-          <Text className="text-3xl font-bold tracking-tighter uppercase">
-            {o.title}
-          </Text>
-          <Text className="text-xl text-slate-500 mt-2">{o.subtitle}</Text>
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-8">
-            {SCRIPTS.slice(0, 3).map((s, index) => (
-              <li key={index} className={cn(courierPrime.className)}>
-                <Link href={`/`}>
-                  <div className="bg-white shadow-2xl hover:shadow-md transition duration-500 ease-in-out flex flex-row border rounded h-[36rem]">
-                    <div className="flex-1 flex flex-col items-center justify-center ">
-                      <Text className="text-xl font-black uppercase text-center">
-                        {s?.title}
-                      </Text>
-                      <Text className="mt-12 text-xl uppercase text-center">
-                        written by
-                      </Text>
-                      <Text className="text-xl font-black uppercase text-center">
-                        {s?.writtenBy}
-                      </Text>
-                    </div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
+    <div className={cn("mt-12", fontCaveat.variable)}>
+      <Hero />
+
+      <FasterSmarterBeautifulBento className="container my-48" />
+      <ShareConnectPaidWidgetBento className="container my-48" />
+      {/* <OpenBuildTemplateBento className="container my-48" /> */}
+
+      {/* <Callout starCount={starCount} /> */}
     </div>
   );
 }

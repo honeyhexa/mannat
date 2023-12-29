@@ -104,7 +104,7 @@ const columns: ColumnDef<Payment>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="">{row.getValue("name")}</div>,
+    cell: ({ row }) => <div className="font-semibold">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "genre",
