@@ -33,7 +33,7 @@ export const ShareConnectPaidWidgetBento = ({
       </h2>
 
       <div className="mt-6 grid grid-cols-2 gap-8 md:mt-8">
-        <Card className="col-span-2 lg:col-span-1" degrees={120} gradient>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Secure Script Viewing (Soon).</strong>
@@ -50,7 +50,7 @@ export const ShareConnectPaidWidgetBento = ({
           </CardContent>
         </Card>
 
-        <Card className="col-span-2 lg:col-span-1" spotlight>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Connections (Soon).</strong>
@@ -67,7 +67,7 @@ export const ShareConnectPaidWidgetBento = ({
           </CardContent>
         </Card>
 
-        <Card className="col-span-2 lg:col-span-1" spotlight>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Version Control (Soon).</strong>
@@ -84,7 +84,7 @@ export const ShareConnectPaidWidgetBento = ({
           </CardContent>
         </Card>
 
-        <Card className="col-span-2 lg:col-span-1" spotlight>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Legal and Copyright Protection (Soon).</strong>

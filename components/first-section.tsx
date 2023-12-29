@@ -1,11 +1,5 @@
 import { HTMLAttributes } from 'react';
 
-import Image from 'next/image';
-
-// import backgroundPattern from '@documenso/assets/images/background-pattern.png';
-// import cardBeautifulFigure from '@documenso/assets/images/card-beautiful-figure.png';
-// import cardFastFigure from '@documenso/assets/images/card-fast-figure.png';
-// import cardSmartFigure from '@documenso/assets/images/card-smart-figure.png';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -30,7 +24,7 @@ export const FasterSmarterBeautifulBento = ({
       </h2>
 
       <div className="mt-6 grid grid-cols-2 gap-8 md:mt-8">
-        <Card className="col-span-2" degrees={45} gradient>
+        <Card className="col-span-2">
           <CardContent className="grid grid-cols-12 gap-8 overflow-hidden p-6 lg:aspect-[2.5/1]">
             <p className="text-foreground/80 col-span-12 leading-relaxed lg:col-span-6">
               <strong className="block">Scripts Listing</strong>
@@ -47,7 +41,7 @@ export const FasterSmarterBeautifulBento = ({
           </CardContent>
         </Card>
 
-        <Card className="col-span-2 lg:col-span-1" spotlight>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Search and Filter Options.</strong>
@@ -64,7 +58,7 @@ export const FasterSmarterBeautifulBento = ({
           </CardContent>
         </Card>
 
-        <Card className="col-span-2 lg:col-span-1" spotlight>
+        <Card className="col-span-2 lg:col-span-1">
           <CardContent className="grid grid-cols-1 gap-8 p-6">
             <p className="text-foreground/80 leading-relaxed">
               <strong className="block">Revenue Model</strong>

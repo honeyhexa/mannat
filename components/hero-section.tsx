@@ -103,7 +103,7 @@ export const Hero = ({ className, ...props }: HeroProps) => {
           Scripting Success,
           <span className="block" /> Connecting writers and producers
         </h2>
-        <p className="mt-8 text-center text-lg w-[40rem] m-auto leading-tight tracking-tight">Dive into a world of creativity and innovation, where you'll find a diverse selection of scripts for every genre, style, and format.</p>
+        <p className="mt-8 text-center text-lg w-[40rem] m-auto leading-tight tracking-tight">Dive into a world of creativity and innovation, where you&apos;ll find a diverse selection of scripts for every genre, style, and format.</p>
 
         <Link href="/signin"
         //   variants={HeroTitleVariants}
