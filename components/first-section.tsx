@@ -28,7 +28,7 @@ export const FasterSmarterBeautifulBento = ({
           <CardContent className="grid grid-cols-12 gap-8 overflow-hidden p-6 lg:aspect-[2.5/1]">
             <p className="text-foreground/80 col-span-12 leading-relaxed lg:col-span-6">
               <strong className="block">Scripts Listing</strong>
-              Writers can upload their scripts with summaries, loglines, genre classifications, and perhaps a brief excerpt.
+              A place for writers to list their scripts and for producers to find them.
             </p>
 
             <div className="col-span-12 -my-6 -mr-6 flex items-end justify-end pt-12 lg:col-span-6">
