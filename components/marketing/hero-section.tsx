@@ -9,7 +9,7 @@ export default function HeroSection () {
                     </h1>
                     <h2 className="">
                         {/* <span className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl">Scripting Success</span> <br/> <br/> */}
-                        <span className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black">
+                        <span className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black">
                             Connecting Writers and Producers
                         </span>
                     </h2>
@@ -17,7 +17,7 @@ export default function HeroSection () {
                     Join a community of passionate scriptwriters, pitch your ideas, and connect with industry professionals looking for the next big hit.
                     </p>
                     <div className="items-center justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
-                        <a href="/sign-in" className="block py-2 px-4 text-white font-medium bg-black duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none">
+                        <a href="/sign-in" className="block py-2 px-4 font-medium duration-150 text-white bg-black rounded-lg shadow-lg hover:shadow-none">
                             Showcase Your Script
                         </a>
                         <a href="/sign-in" className="block py-2 px-4 text-gray-700 hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg">

@@ -44,7 +44,8 @@ export default function TestimonialsSection () {
         <section className="border-y py-36">
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="max-w-xl sm:text-center md:mx-auto">
-                    <h3 className="text-gray-800 text-3xl font-extrabold sm:text-4xl">
+                <h3 className="text-indigo-600 font-semibold mb-2">Testimonials</h3>
+                    <h3 className="drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
                         See what writers are saying
                     </h3>
                     <p className="mt-3 text-gray-600">

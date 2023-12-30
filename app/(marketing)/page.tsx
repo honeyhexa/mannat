@@ -4,6 +4,7 @@ import ClientSection from "@/components/marketing/client-section";
 import FaqsSection from "@/components/marketing/faqs-section";
 import FeaturesSection from "@/components/marketing/features-section";
 import HeroSection from "@/components/marketing/hero-section";
+import PricingSection from "@/components/marketing/pricing-section";
 import StatsSection from "@/components/marketing/stats-section";
 import TestimonialsSection from "@/components/marketing/testimonials-section";
 import { ShareConnectPaidWidgetBento } from "@/components/second-section";
@@ -36,6 +37,7 @@ export default async function IndexPage() {
       <ClientSection />
       <StatsSection />
       <FeaturesSection />
+      <PricingSection />
       <TestimonialsSection />
       <FaqsSection />
       {/* <Hero /> */}
