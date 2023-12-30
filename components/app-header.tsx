@@ -30,7 +30,7 @@ const AppHeader = () => {
           <SignedIn>
             <div className="flex flex-row gap-8">
 
-            <Link href="/app">
+            <Link href="/">
               <Text className="text-2xl tracking-tighter uppercase font-black">
                 Mannat
               </Text>

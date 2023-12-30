@@ -1,7 +1,6 @@
 <div align="center">
   <h1 align="center">Mannat</h1>
   <h3>A Platform for connecting Writers and Producers</h3>
-
 </div>
 
 <div align="center">
@@ -17,6 +16,8 @@
 </div>
 
 <br/>
+
+![Alt](https://repobeats.axiom.co/api/embed/c03e93742a912b7d0b1b3f518da0da8b61051c50.svg "Repobeats analytics image")
 
 Mannat is a platform for Writers to share scripts / screenplays to Producers with built-in analytics.
 ## Features

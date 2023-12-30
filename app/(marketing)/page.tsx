@@ -1,5 +1,11 @@
 import { FasterSmarterBeautifulBento } from "@/components/first-section";
 import { Hero } from "@/components/hero-section";
+import ClientSection from "@/components/marketing/client-section";
+import FaqsSection from "@/components/marketing/faqs-section";
+import FeaturesSection from "@/components/marketing/features-section";
+import HeroSection from "@/components/marketing/hero-section";
+import StatsSection from "@/components/marketing/stats-section";
+import TestimonialsSection from "@/components/marketing/testimonials-section";
 import { ShareConnectPaidWidgetBento } from "@/components/second-section";
 import { OpenBuildTemplateBento } from "@/components/third-section";
 import { cn } from "@/lib/utils";
@@ -26,10 +32,16 @@ export default async function IndexPage() {
 
   return (
     <div className={cn("mt-12", fontCaveat.variable)}>
-      <Hero />
+      <HeroSection />
+      <ClientSection />
+      <StatsSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <FaqsSection />
+      {/* <Hero /> */}
 
-      <FasterSmarterBeautifulBento className="container my-48" />
-      <ShareConnectPaidWidgetBento className="container my-48" />
+      {/* <FasterSmarterBeautifulBento className="container my-48" /> */}
+      {/* <ShareConnectPaidWidgetBento className="container my-48" /> */}
       {/* <OpenBuildTemplateBento className="container my-48" /> */}
 
       {/* <Callout starCount={starCount} /> */}

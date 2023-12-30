@@ -147,7 +147,7 @@ const CreateScript = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Papermark Link - <Link className="text-blue-500" href="https://papermark.io" target="_blank">First add PDF here</Link>
+                    Papermark Link - <Link className="text-blue-500" href="https://papermark.io/login" target="_blank">First add PDF here</Link>
                     
                   </FormLabel>
                   <FormControl>
