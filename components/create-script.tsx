@@ -30,6 +30,9 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -38,6 +41,11 @@ const formSchema = z.object({
   genre: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  papermark_url: z.string().min(15, {
+    message: "Papermark must be at least 19 characters.",
+  }).startsWith("https://papermark.io/view/", {
+    message: "Please add a valid Papermark link.",
+}),
 });
 
 const CreateScript = () => {
@@ -51,6 +59,7 @@ const CreateScript = () => {
     defaultValues: {
       name: "",
       genre: "",
+      papermark_url: "",
     },
   });
 
@@ -110,7 +119,7 @@ const CreateScript = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Terminator" {...field} />
                   </FormControl>
                   {/* <FormDescription>This is your email.</FormDescription> */}
                   <FormMessage />
@@ -124,7 +133,27 @@ const CreateScript = () => {
                 <FormItem>
                   <FormLabel>Genre</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Action" {...field} />
+                  </FormControl>
+                  {/* <FormDescription>This is your Full name.</FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="papermark_url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Papermark Link - <Link className="text-blue-500" href="https://papermark.io" target="_blank">First add PDF here</Link>
+                    
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="https://papermark.io/view/abcxyz..."
+                      {...field}
+                    />
                   </FormControl>
                   {/* <FormDescription>This is your Full name.</FormDescription> */}
                   <FormMessage />

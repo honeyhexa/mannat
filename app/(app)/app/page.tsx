@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  ArrowTopRightIcon,
   CaretSortIcon,
   ChevronDownIcon,
   DotsHorizontalIcon,
@@ -52,13 +53,18 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Link from "next/link";
+
+export type Author = {
+  full_name: string;
+}
 
 export type Payment = {
   id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
   name: string;
   genre: string;
+  papermark_url: string;
+  Authors: Author;
 };
 
 const columns: ColumnDef<Payment>[] = [
@@ -122,6 +128,23 @@ const columns: ColumnDef<Payment>[] = [
     cell: ({ row }) => <div className="">{row.getValue("genre")}</div>,
   },
   {
+    accessorKey: "Authors",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Author
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="font-semibold">{(row.getValue("Authors") as Author)?.full_name}</div>
+    ),
+  },
+  {
     accessorKey: "created_at",
     header: ({ column }) => {
       return (
@@ -146,6 +169,23 @@ const columns: ColumnDef<Payment>[] = [
         </Tooltip>
       </TooltipProvider>
     ),
+  },
+  {
+    accessorKey: "papermark_url",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Script
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => <>
+    {row.getValue("papermark_url") ? <Link href={row.getValue("papermark_url")} target="_blank"><Button size="sm" variant="outline">Read Script &nbsp;<ArrowTopRightIcon /></Button></Link> : "-"}
+    </>,
   },
   // {
   //   accessorKey: "amount",

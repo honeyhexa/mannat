@@ -113,8 +113,8 @@ export const Hero = ({ className, ...props }: HeroProps) => {
         >
           <Button
             type="button"
-            variant="outline"
-            className="rounded-full bg-transparent backdrop-blur-sm"
+            variant="default"
+            className="rounded-full backdrop-blur-sm"
             // onClick={onSignUpClick}
           >
             Start Showcasing Now

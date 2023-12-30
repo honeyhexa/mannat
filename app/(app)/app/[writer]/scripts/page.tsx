@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import {
+  ArrowTopRightIcon,
   CaretSortIcon,
   ChevronDownIcon,
   DotsHorizontalIcon,
@@ -52,13 +53,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Link from "next/link";
 
 export type Payment = {
   id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
   name: string;
   genre: string;
+  papermark_url: string;
 };
 
 const columns: ColumnDef<Payment>[] = [
@@ -104,7 +105,9 @@ const columns: ColumnDef<Payment>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="font-semibold">{row.getValue("name")}</div>,
+    cell: ({ row }) => (
+      <div className="font-semibold">{row.getValue("name")}</div>
+    ),
   },
   {
     accessorKey: "genre",
@@ -162,6 +165,23 @@ const columns: ColumnDef<Payment>[] = [
   //     return <div className="text-right font-medium">{formatted}</div>;
   //   },
   // },
+  {
+    accessorKey: "papermark_url",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Script
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => <>
+    {row.getValue("papermark_url") ? <Link href={row.getValue("papermark_url")} target="_blank"><Button size="sm" variant="outline">Read Script &nbsp;<ArrowTopRightIcon /></Button></Link> : "-"}
+    </>,
+  },
   {
     id: "actions",
     header: () => <div className="text-right">Actions</div>,
@@ -385,7 +405,7 @@ export default function MyScriptsPage() {
       <div className="container w-full py-8">
         {isLoading && "Loading..."}
         {error && "An error has occurred: "}
-        {(!isLoading && data) && <TableCard />}
+        {!isLoading && data && <TableCard />}
       </div>
     </div>
   );

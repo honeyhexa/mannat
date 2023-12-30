@@ -20,7 +20,7 @@ export async function GET(
   try {
     let { data, error } = await supabase
       .from(TABLE_NAME)
-      .select("*")
+      .select(`*, Authors("*")`)
       .order("created_at", { ascending: false });
     console.log(data, error);
     return new Response(JSON.stringify(data));
