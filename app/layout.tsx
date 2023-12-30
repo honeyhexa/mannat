@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="">
       <head>
       <script async defer src="https://scripts.withcabin.com/hello.js"></script>
       </head>

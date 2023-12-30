@@ -11,8 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -21,18 +19,16 @@ import * as z from "zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { useQueryClient } from "react-query";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -49,7 +45,9 @@ const formSchema = z.object({
 });
 
 const CreateScript = () => {
+  const queryClient = useQueryClient();
   const { isSignedIn, user, isLoaded } = useUser();
+  const [open, setOpen] = useState(false);
 
   const [saving, setSaving] = useState(false);
 
@@ -80,17 +78,20 @@ const CreateScript = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast.success("Script created successfully!");
       })
       .catch((err) => {
         console.error(err);
+        toast.error("Something went wrong!");
       })
       .finally(() => {
         setSaving(false);
-        window.location.reload();
+        queryClient.invalidateQueries("writer-scripts");
+        setOpen(false);
       });
-  }
+    }
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           className="cursor-pointer rounded-md border border-black bg-black px-4 py-2 gap-4 text-sm font-medium text-white transition-all duration-75 hover:bg-white hover:text-black active:scale-95"

@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useUser } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useQuery, useQueryClient } from "react-query";
 
 const formSchema = z.object({
   full_name: z.string().min(2, {
@@ -51,12 +53,13 @@ export default function ProfileForm() {
         .then((data) => {
           form.setValue("user_name", data?.[0]?.user_name);
           form.setValue("full_name", data?.[0]?.full_name);
-          form.setValue("email", user?.primaryEmailAddress?.emailAddress ?? '');
+          form.setValue("email", user?.primaryEmailAddress?.emailAddress ?? "");
         })
         .catch((err) => {
           console.error(err);
         });
     }
+
   }, [isSignedIn, user?.id, form]);
 
   // 2. Define a submit handler.
@@ -76,9 +79,11 @@ export default function ProfileForm() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        toast.success("Profile updated successfully!");
       })
       .catch((err) => {
         console.error(err);
+        toast.error("Something went wrong!");
       })
       .finally(() => {
         setSaving(false);
@@ -86,7 +91,15 @@ export default function ProfileForm() {
   }
 
   return (
-    <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden bg-gray-50">
+    <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden">
+      <div className="flex h-36 items-center border-b border-gray-200 bg-white">
+        <div className="container">
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl text-gray-600">Settings</h1>
+            {/* <CreateScript /> */}
+          </div>
+        </div>
+      </div>
       <div className="container py-8">
         <Card className="w-1/2">
           <CardHeader>

@@ -20,6 +20,7 @@ import {
 } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import UserMenu from "@/components/user-menu";
+import UserNav from "@/components/user-nav";
 
 const AppHeader = () => {
   return (
@@ -27,11 +28,16 @@ const AppHeader = () => {
       <div className="container flex h-16 items-center justify-between">
         <div>
           <SignedIn>
+            <div className="flex flex-row gap-8">
+
             <Link href="/app">
               <Text className="text-2xl tracking-tighter uppercase font-black">
                 Mannat
               </Text>
             </Link>
+            <UserNav />
+            </div>
+
           </SignedIn>
           <SignedOut>
             <Link href="/">

@@ -2,6 +2,7 @@
 
 import AppFooter from "@/components/app-footer";
 import AppHeader from "@/components/app-header";
+import { Toaster } from "@/components/ui/sonner";
 import { Metadata } from "next";
 
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
@@ -20,6 +21,7 @@ export default function RootLayout({
       <main>{children}</main>
       <AppFooter />
     </div>
+    <Toaster theme="light" richColors/>
     </QueryClientProvider>
   );
 }
