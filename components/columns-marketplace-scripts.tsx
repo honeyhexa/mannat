@@ -19,6 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { formatDistance } from "date-fns";
+import ReadScript from "./read-script";
 
 export const columns: ColumnDef<any>[] = [
   {
@@ -27,11 +28,8 @@ export const columns: ColumnDef<any>[] = [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      //   const label = labels.find((label) => label.value === row.original.label)
-
       return (
         <div className="flex space-x-2">
-          {/* {label && <Badge variant="outline">{label.label}</Badge>} */}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("name")}
           </span>
@@ -94,14 +92,7 @@ export const columns: ColumnDef<any>[] = [
     cell: ({ row }) => (
       <>
         {row.getValue("papermark_url") ? (
-          <Link
-            href={row.getValue("papermark_url")}
-            target="_blank"
-            className="flex flex-row items-center hover:underline underline-offset-2"
-          >
-            Read Script&nbsp;
-            <ArrowTopRightIcon />
-          </Link>
+          <ReadScript papermarkUrl={row.getValue("papermark_url")} />
         ) : (
           "-"
         )}
