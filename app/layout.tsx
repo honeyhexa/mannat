@@ -18,6 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+      <script async defer src="https://scripts.withcabin.com/hello.js"></script>
+      </head>
       <ClerkProvider>
       <body className={cn(inter.className, "min-h-screen bg-background antialiased")}>{children}</body>
       </ClerkProvider>
