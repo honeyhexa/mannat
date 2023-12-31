@@ -22,7 +22,7 @@ const UserNav = () => {
             "text-primary": pathname === "/app/writer/scripts",
         })}
       >
-        Scripts
+        My Scripts
       </Link>
     </nav>
   );

@@ -19,7 +19,6 @@ export default function RootLayout({
     <div className="flex min-h-screen flex-col">
       <AppHeader />
       <main>{children}</main>
-      <AppFooter />
     </div>
     <Toaster theme="light" richColors/>
     </QueryClientProvider>

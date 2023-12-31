@@ -13,7 +13,7 @@ const ReadScript = ({ papermarkUrl }: { papermarkUrl: string }) => {
       <DialogTrigger asChild>
         <Text
           onClick={() => setOpen(true)}
-          className="cursor-pointer flex flex-row items-center hover:underline underline-offset-2"
+          className="cursor-pointer flex flex-row items-center text-blue-500 hover:underline underline-offset-2"
         >
           Read Script&nbsp;
           <ArrowTopRightIcon />

@@ -48,7 +48,7 @@ const UserMenu = () => {
           {/* <DropdownMenuSeparator /> */}
           <Link href="/app/writer/scripts">
             <DropdownMenuItem className="cursor-pointer">
-              Scripts
+              My Scripts
             </DropdownMenuItem>
           </Link>
           <DropdownMenuItem>Earnings</DropdownMenuItem>

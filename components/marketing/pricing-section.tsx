@@ -47,7 +47,7 @@ export default function PricingSection() {
         <div className="relative max-w-xl mx-auto space-y-3 px-4 sm:text-center sm:px-0">
           <h3 className="text-indigo-600 font-semibold">Pricing</h3>
           <p className="tracking-tight drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
-            Pay as you grow
+            Pay to access the best scripts
           </p>
           <div className="max-w-xl">
             <p>
@@ -91,9 +91,9 @@ export default function PricingSection() {
                       fill="currentColor"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       ></path>
                     </svg>
                     {featureItem}
