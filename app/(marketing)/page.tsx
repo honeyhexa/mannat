@@ -1,5 +1,3 @@
-import { FasterSmarterBeautifulBento } from "@/components/first-section";
-import { Hero } from "@/components/hero-section";
 import ClientSection from "@/components/marketing/client-section";
 import FaqsSection from "@/components/marketing/faqs-section";
 import FeaturesSection from "@/components/marketing/features-section";
@@ -7,15 +5,13 @@ import HeroSection from "@/components/marketing/hero-section";
 import PricingSection from "@/components/marketing/pricing-section";
 import StatsSection from "@/components/marketing/stats-section";
 import TestimonialsSection from "@/components/marketing/testimonials-section";
-import { ShareConnectPaidWidgetBento } from "@/components/second-section";
-import { OpenBuildTemplateBento } from "@/components/third-section";
 import { cn } from "@/lib/utils";
 import { Caveat } from "next/font/google";
 
 export const revalidate = 600;
 
 const fontCaveat = Caveat({
-  weight: ["500"],
+  weight: ["700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-caveat",

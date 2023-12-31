@@ -3,10 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
-import { DataTableRowActions } from "@/components/data-table/data-table-row-actions";
-import Link from "next/link";
 import {
-  ArrowTopRightIcon,
   DotsHorizontalIcon,
   TrashIcon,
 } from "@radix-ui/react-icons";
@@ -26,9 +23,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import ReadScript from "./read-script";
 
 export const columns = ({ handleDelete }: any):ColumnDef<any>[] => [
   {
@@ -37,11 +33,8 @@ export const columns = ({ handleDelete }: any):ColumnDef<any>[] => [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => {
-      //   const label = labels.find((label) => label.value === row.original.label)
-
       return (
         <div className="flex space-x-2">
-          {/* {label && <Badge variant="outline">{label.label}</Badge>} */}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("name")}
           </span>
@@ -89,14 +82,7 @@ export const columns = ({ handleDelete }: any):ColumnDef<any>[] => [
     cell: ({ row }) => (
       <>
         {row.getValue("papermark_url") ? (
-          <Link
-            href={row.getValue("papermark_url")}
-            target="_blank"
-            className="flex flex-row items-center hover:underline underline-offset-2"
-          >
-            Read Script&nbsp;
-            <ArrowTopRightIcon />
-          </Link>
+          <ReadScript papermarkUrl={row.getValue("papermark_url")} />
         ) : (
           "-"
         )}

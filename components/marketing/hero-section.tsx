@@ -9,7 +9,7 @@ export default function HeroSection () {
                     </h1>
                     <h2 className="">
                         {/* <span className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl">Scripting Success</span> <br/> <br/> */}
-                        <span className="text-4xl text-gray-800 font-extrabold mx-auto md:text-5xl drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black">
+                        <span className="text-4xl tracking-tight text-gray-800 font-extrabold mx-auto md:text-5xl tracking-tight drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black">
                             Connecting Writers and Producers
                         </span>
                     </h2>

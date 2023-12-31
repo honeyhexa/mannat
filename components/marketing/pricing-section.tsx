@@ -46,7 +46,7 @@ export default function PricingSection() {
       <div className="max-w-screen-xl mx-auto text-gray-600 sm:px-4 md:px-8">
         <div className="relative max-w-xl mx-auto space-y-3 px-4 sm:text-center sm:px-0">
           <h3 className="text-indigo-600 font-semibold">Pricing</h3>
-          <p className="drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
+          <p className="tracking-tight drop-shadow text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
             Pay as you grow
           </p>
           <div className="max-w-xl">

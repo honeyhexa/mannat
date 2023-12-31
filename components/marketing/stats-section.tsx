@@ -24,7 +24,7 @@ export default function StatsSection () {
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="max-w-2xl mx-auto text-center">
                 <h3 className="text-indigo-400 font-semibold mb-2">Statistics</h3>
-                    <h3 className="drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-300 text-3xl font-extrabold sm:text-4xl">
+                    <h3 className="tracking-tight drop-shadow-2xl text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-300 text-3xl font-extrabold sm:text-4xl">
                         Our writers are always happy
                     </h3>
                     <p className="mt-3 text-gray-300">

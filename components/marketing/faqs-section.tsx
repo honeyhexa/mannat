@@ -31,7 +31,7 @@ export default function FaqsSection () {
                         <h3 className='font-semibold text-indigo-600'>
                             Frequently asked questions
                         </h3>
-                        <p className='mt-3 drop-shadow text-transparent bg-clip-text bg-gradient-to-br from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl'>
+                        <p className='mt-3 tracking-tight drop-shadow text-transparent bg-clip-text bg-gradient-to-br from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl'>
                             All information you need to know
                         </p>
                     </div>

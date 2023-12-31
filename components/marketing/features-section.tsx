@@ -35,7 +35,7 @@ export default function FeaturesSection () {
                         <h3 className="text-indigo-600 font-semibold">
                             Features
                         </h3>
-                        <p className="drop-shadow text-transparent bg-clip-text bg-gradient-to-br from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
+                        <p className="tracking-tight drop-shadow text-transparent bg-clip-text bg-gradient-to-br from-zinc-500 to-black text-3xl font-extrabold sm:text-4xl">
                             Simple solutions for complex issues
                         </p>
                         <p>
