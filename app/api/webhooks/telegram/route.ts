@@ -76,7 +76,7 @@ export async function POST(req) {
     try {
 
       // Notify Mannat Signup using Telegram Bot
-      fetch(
+      const res = await fetch(
         "https://api.telegram.org/bot" +
           process.env.TELEGRAM_BOT_TOKEN +
           "/sendMessage",
@@ -92,6 +92,7 @@ export async function POST(req) {
         }
       );
 
+      console.log("Telegram Res --> ", await res.json());
     } catch (error) {
       console.log(error);
       return new Response(JSON.stringify({ error: "error" }));

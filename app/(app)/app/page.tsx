@@ -7,20 +7,18 @@ import { useQuery } from "react-query";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns-marketplace-scripts";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import Text from "@/components/text";
 
-export type Author = {
-  full_name: string;
-};
+import palettes from "nice-color-palettes/1000.json";
+import ReadScript from "@/components/read-script";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
-export type Payment = {
-  id: string;
-  name: string;
-  genre: string;
-  papermark_url: string;
-  Authors: Author;
-};
+function hashCode(s: any[]) {
+  return [...s].reduce(
+    (hash, c) => (Math.imul(31, hash) + c.charCodeAt(0)) | 0,
+    0
+  );
+}
 
 export default function AppPage() {
   const { isLoading, error, data } = useQuery("marketplace-scripts", () =>
@@ -39,29 +37,64 @@ export default function AppPage() {
         </div>
       );
     if (error) return <div>Something went wrong!</div>;
-    return <DataTable data={data} columns={columns} />;
+    // return <DataTable data={data} columns={columns} />;
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+        {data.map((o: any, i: React.Key) => {
+          const colors = palettes[Math.abs(hashCode(o.id)) % palettes.length];
+
+          return (
+            <div key={i} className="group flex flex-col cursor-pointer pb-10">
+              <div className="w-full h-72 bg-zinc-50 group-hover:bg-zinc-100 flex items-center justify-center">
+                <div
+                  style={{
+                    background: `linear-gradient(45deg, ${colors?.[0]}, ${colors?.[1]})`,
+                  }}
+                  className="w-1/2 h-3/4 bg-zinc-100 group-hover:scale-110 transition-all duration-500 ease-in-out"
+                ></div>
+              </div>
+              <Text className="text-base font-semibold pt-4 pb-3">
+                {o.name}
+              </Text>
+              <div className="flex flex-row justify-between items-end">
+                <div className="flex flex-col">
+                  <Text className="text-xs italic text-muted-foreground">
+                    {o.genre}
+                  </Text>
+                  <Text className="text-xs font-medium pt-1">
+                    {o?.Authors?.full_name}
+                  </Text>
+                </div>
+                <div className="flex flex-col">
+                  {o.papermark_url ? (
+                    // <ReadScript papermarkUrl={o.papermark_url}>
+                      <Text className="text-xs font-medium text-blue-500 hover:underline underline-offset-2 flex flex-row">
+                    Read Script &nbsp;
+            <ArrowTopRightIcon />
+                  </Text>
+                    // </ReadScript>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              {/* <Text className="text-xs font-medium pt-1">$ 99</Text> */}
+            </div>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
     <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden bg-background">
-      <div className="flex h-36 items-center border-b border-gray-200 bg-white">
+      {/* <div className="flex h-36 items-center border-b border-gray-200 bg-white">
         <div className="container">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl text-gray-600">Marketplace</h1>
-            {/* <Link href="/app/writer/scripts/new">
-              <Button
-                className="cursor-pointer rounded-md border border-black bg-black px-4 py-2 gap-4 text-sm font-medium text-white transition-all duration-75 hover:bg-white hover:text-black active:scale-95"
-                variant="outline"
-              >
-                New Script
-                <kbd className="hidden rounded bg-zinc-700 px-2 py-0.5 text-xs font-light text-gray-400 transition-all duration-75 group-hover:bg-gray-100 group-hover:text-gray-500 md:inline-block">
-                  N
-                </kbd>
-              </Button>
-            </Link> */}
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="container w-full py-8">
         <RenderTable />
       </div>

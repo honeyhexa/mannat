@@ -6,18 +6,22 @@ import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import Text from "./text";
 import { useState } from "react";
 
-const ReadScript = ({ papermarkUrl }: { papermarkUrl: string }) => {
+const ReadScript = ({ papermarkUrl, children }: { papermarkUrl: string, children?: any }) => {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Text
-          onClick={() => setOpen(true)}
-          className="cursor-pointer flex flex-row items-center text-blue-500 hover:underline underline-offset-2"
-        >
-          Read Script&nbsp;
-          <ArrowTopRightIcon />
-        </Text>
+        {children ? (
+          children
+        ) : (
+          <Text
+            onClick={() => setOpen(true)}
+            className="cursor-pointer flex flex-row items-center text-blue-500 hover:underline underline-offset-2"
+          >
+            Read Script&nbsp;
+            <ArrowTopRightIcon />
+          </Text>
+        )}
       </DialogTrigger>
       <DialogContent
         onOpenAutoFocus={(e) => e.preventDefault()}
