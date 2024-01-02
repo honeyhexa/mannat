@@ -3,13 +3,6 @@
 import type { User } from "@clerk/nextjs/api";
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseUrl = process.env.SUPABASE_URL ?? "";
-const supabaseKey = process.env.SUPABASE_ANON_KEY ?? "";
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-const TABLE_NAME = "Authors";
 
 type UnwantedKeys =
   | "emailAddresses"
@@ -34,7 +27,7 @@ interface UserInterface extends Omit<User, UnwantedKeys> {
   }[];
 }
 
-const webhookSecret: string = process.env.WEBHOOK_SECRET || "";
+const webhookSecret: string = process.env.WEBHOOK_SECRET_TELEGRAM || "";
 
 export async function POST(req) {
   const payload = await req.json();
@@ -81,20 +74,24 @@ export async function POST(req) {
     }
 
     try {
-      let { data, error } = await supabase
-        .from(TABLE_NAME)
-        .insert({
-          id,
-          user_name:
-            emailObject?.email_address?.split?.("@")?.[0] ??
-            emailObject?.email_address,
-          full_name: `${evt.data.first_name} ${evt.data.last_name}`,
-          email: emailObject.email_address,
-        })
-        .select();
-      console.log(data, error);
 
-      return new Response(JSON.stringify(data));
+      // Notify Mannat Signup using Telegram Bot
+      fetch(
+        "https://api.telegram.org/bot" +
+          process.env.TELEGRAM_BOT_TOKEN +
+          "/sendMessage",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            chat_id: process.env.TELEGRAM_CHAT_ID_MANNAT_SIGNUP,
+            text: `Name: ${evt.data.first_name} ${evt.data.last_name} with Email: ${emailObject?.email_address}`,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
     } catch (error) {
       console.log(error);
       return new Response(JSON.stringify({ error: "error" }));
