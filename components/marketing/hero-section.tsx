@@ -17,10 +17,10 @@ export default function HeroSection () {
                     Join a community of passionate scriptwriters, pitch your ideas, and connect with industry professionals looking for the next big hit.
                     </p>
                     <div className="items-center justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
-                        <a href="/sign-in" className="block py-2 px-4 font-medium duration-150 text-white bg-black rounded-lg shadow-lg hover:shadow-none">
+                        <a href="/app" className="block py-2 px-4 font-medium duration-150 text-white bg-black rounded-lg shadow-lg hover:shadow-none">
                             Showcase Your Script
                         </a>
-                        <a href="/sign-in" className="block py-2 px-4 text-gray-700 hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg">
+                        <a href="/app" className="block py-2 px-4 text-gray-700 hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg">
                             Need a Script
                         </a>
                     </div>
