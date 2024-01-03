@@ -11,6 +11,13 @@ const TABLE_NAME = "Scripts";
 export async function GET(
   request: Request,
 ) {
+  const searchParams = new URL(request.url).searchParams;
+  const pageSize: number = Number(searchParams.get("pageSize")) || 4;
+  const page: number = Number(searchParams.get('page')) ?? 0;
+
+  const from = page * pageSize;
+  const to = from + pageSize - 1;
+
   const user = await currentUser();
 
   if (!user) {
@@ -21,8 +28,8 @@ export async function GET(
     let { data, error } = await supabase
       .from(TABLE_NAME)
       .select(`*, Authors("*")`)
+      .range(from, to)
       .order("created_at", { ascending: false });
-    console.log(data, error);
     return new Response(JSON.stringify(data));
   } catch (error) {
     console.log(error);

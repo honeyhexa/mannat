@@ -21,7 +21,7 @@ const ScriptCard = (o: any) => {
           style={{
             background: `linear-gradient(45deg, ${colors?.[0]}, ${colors?.[1]})`,
           }}
-          className="rounded shadow-2xl w-1/2 h-3/4 bg-zinc-100 group-hover:scale-110 transition-all duration-500 ease-in-out"
+          className="rounded shadow-2xl w-40 h-56 bg-zinc-100 group-hover:scale-110 transition-all duration-500 ease-in-out"
         ></div>
       </div>
       <Text className="text-base font-semibold pt-4 pb-3">{o.name}</Text>
