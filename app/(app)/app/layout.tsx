@@ -7,7 +7,13 @@ import { Metadata } from "next";
 
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
 
 export default function RootLayout({
   children,

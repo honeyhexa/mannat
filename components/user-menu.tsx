@@ -52,7 +52,7 @@ const UserMenu = () => {
             </DropdownMenuItem>
           </Link>
           <DropdownMenuItem>Earnings</DropdownMenuItem>
-          <Link href="/app/writer/profile">
+          <Link href="/app/settings">
             <DropdownMenuItem className="cursor-pointer">
               Profile
             </DropdownMenuItem>
