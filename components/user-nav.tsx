@@ -30,7 +30,7 @@ const UserNav = () => {
           className={cn(
             "text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
             {
-              "text-primary": pathname === o.href,
+              "text-primary": pathname.startsWith(o.href),
             }
           )}
         >
