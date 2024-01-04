@@ -1,7 +1,7 @@
-import { ProfileForm } from '@/components/profile-form';
-import { Separator } from '@/components/ui/separator';
-import { SignedIn } from '@clerk/nextjs';
-import React from 'react'
+import { ProfileForm } from "@/components/profile-form";
+import { Separator } from "@/components/ui/separator";
+import { SignedIn } from "@clerk/nextjs";
+import React from "react";
 
 const page = () => {
   return (
@@ -14,10 +14,10 @@ const page = () => {
       </div>
       <Separator />
       <SignedIn>
-      <ProfileForm />
+        <ProfileForm />
       </SignedIn>
     </div>
-  )
-}
+  );
+};
 
 export default page;

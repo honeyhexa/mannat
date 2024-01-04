@@ -1,4 +1,3 @@
-import { ProfileForm } from '@/components/profile-form';
 import { Separator } from '@/components/ui/separator';
 import React from 'react'
 
@@ -12,7 +11,6 @@ const page = () => {
         </p>
       </div>
       <Separator />
-      {/* <ProfileForm /> */}
     </div>
   )
 }

@@ -51,10 +51,10 @@ const UserMenu = () => {
               My Scripts
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>Earnings</DropdownMenuItem>
-          <Link href="/app/settings">
+          {/* <DropdownMenuItem>Earnings</DropdownMenuItem> */}
+          <Link href="/app/account">
             <DropdownMenuItem className="cursor-pointer">
-              Profile
+              Account
             </DropdownMenuItem>
           </Link>
           <DropdownMenuSeparator />

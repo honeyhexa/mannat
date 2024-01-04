@@ -2,15 +2,14 @@
 
 import * as React from "react";
 
-import CreateScript from "@/components/create-script";
 import { useQuery, useQueryClient } from "react-query";
 
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns-writer-scripts";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import NewScript from "@/components/new-script";
 
 export type Payment = {
   id: string;
@@ -43,7 +42,6 @@ export default function MyScriptsPage() {
         toast.error("Something went wrong!");
       })
       .finally(() => {
-        // window.location.reload();
         queryClient.invalidateQueries("writer-scripts");
       });
   };
@@ -64,27 +62,20 @@ export default function MyScriptsPage() {
   };
 
   return (
-    <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden">
-      <div className="flex h-36 items-center border-b border-gray-200 bg-white">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl text-gray-600">My Scripts</h1>
-            <CreateScript />
-            {/* <Link href="/app/writer/scripts/new">
-              <Button
-                className="cursor-pointer rounded-md border border-black bg-black px-4 py-2 gap-4 text-sm font-medium text-white transition-all duration-75 hover:bg-white hover:text-black active:scale-95"
-                variant="outline"
-              >
-                New Script
-                <kbd className="hidden rounded bg-zinc-700 px-2 py-0.5 text-xs font-light text-gray-400 transition-all duration-75 group-hover:bg-gray-100 group-hover:text-gray-500 md:inline-block">
-                  N
-                </kbd>
-              </Button>
-            </Link> */}
+    <div className="flex min-h-screen flex-col container">
+      <div className="hidden space-y-6 py-10 pb-16 md:block">
+        <div className="flex flex-row items-center justify-between">
+          <div className="space-y-0.5">
+            <h2 className="text-2xl font-bold tracking-tight">My Scripts</h2>
+            <p className="text-muted-foreground">
+              All of your scripts in one place.
+            </p>
+          </div>
+          <div>
+            <NewScript />
           </div>
         </div>
-      </div>
-      <div className="container w-full py-8">
+        <Separator className="my-6" />
         <RenderTable />
       </div>
     </div>

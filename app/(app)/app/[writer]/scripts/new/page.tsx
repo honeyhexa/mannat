@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { cn } from "@/lib/utils";
@@ -27,13 +27,12 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Switch } from "@/components/ui/switch";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Check, ChevronsUpDown, InfoIcon } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -41,31 +40,29 @@ import {
   CommandInput,
   CommandItem,
 } from "@/components/ui/command";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { useUser } from "@clerk/nextjs";
+import { useMutation } from "react-query";
+import { useRouter } from "next/navigation";
 
 const profileFormSchema = z.object({
   name: z
-    .string()
+    .string({
+      required_error: "Please enter a name for your script.",
+    })
     .min(2, {
-      message: "Username must be at least 2 characters.",
+      message: "name must be at least 2 characters.",
     })
     .max(30, {
-      message: "Username must not be longer than 30 characters.",
+      message: "name must not be longer than 30 characters.",
     }),
   stage: z.string({
     required_error: "Please select a stage for script.",
@@ -73,7 +70,7 @@ const profileFormSchema = z.object({
   private: z.string({
     required_error: "Please select a stage for script.",
   }),
-  abstract: z.string().max(160).min(4),
+  abstract: z.string().max(160).optional(),
   genres: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: "You have to select at least one genre.",
   }),
@@ -85,8 +82,8 @@ const profileFormSchema = z.object({
   }),
   papermark_url: z
     .string()
-    .min(15, {
-      message: "Papermark must be at least 19 characters.",
+    .min(27, {
+      message: "Papermark must be at least 27 characters.",
     })
     .startsWith("https://papermark.io/view/", {
       message: "Please add a valid Papermark link.",
@@ -97,46 +94,67 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>;
 
 // This can come from your database or API.
 const defaultValues: Partial<ProfileFormValues> = {
-  abstract: "I own a computer.",
-  genres: [],
+  abstract: "",
+  genres: ["Drama"],
   stage: "final-draft",
   private: "public",
   papermark_url: "",
+  country: "IN",
+  language: "hi",
 };
 
 export default function ProfileForm() {
+  const { user } = useUser();
+  const router = useRouter();
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
-  // const { fields, append } = useFieldArray({
-  //   name: "urls",
-  //   control: form.control,
-  // });
+  const mutation = useMutation({
+    mutationFn: (values: any) =>
+      fetch(`/api/scripts/${user?.id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ author: user?.id, ...values }),
+      }).then((res) => res.json()),
+    onSuccess: () => {
+      toast.success("Script created successfully!");
+      router.push(`/app/writer/scripts`);
+    },
+    onError: () => {
+      toast.error("Something went wrong!");
+    },
+  });
 
   function onSubmit(data: ProfileFormValues) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
+    console.log(data);
+    mutation.mutate({ 
+      author: user?.id,
+      name: data.name,
+      genre: data.genres.join(", "),
+      papermark_url: data.papermark_url,
+      is_accessible_for_free: data.private === "public",
+      abstract: data.abstract,
+    });
   }
 
   return (
-    <div className="min-h-screen flex w-full flex-1 flex-col overflow-hidden">
-      <div className="flex h-36 items-center border-b border-gray-200 bg-white">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl text-gray-600">New Script</h1>
+    <div className="flex min-h-screen flex-col container">
+      <div className="hidden space-y-6 py-10 pb-16 md:block">
+        <div className="flex flex-row items-center justify-between">
+          <div className="space-y-0.5">
+            <h2 className="text-2xl font-bold tracking-tight">New Script</h2>
+            <p className="text-muted-foreground">
+              All of your scripts in one place.
+            </p>
           </div>
         </div>
-      </div>
-      <div className="container w-full py-8">
+        <Separator className="my-6" />
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -226,15 +244,15 @@ export default function ProfileForm() {
                   <FormLabel>Abstract</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us a little bit about yourself"
+                      placeholder="Tell us a little bit about your story"
                       className="resize-none"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
+                  {/* <FormDescription>
                     You can <span>@mention</span> other users and organizations
                     to link to them.
-                  </FormDescription>
+                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -246,9 +264,9 @@ export default function ProfileForm() {
                 <FormItem>
                   <div className="mb-4">
                     <FormLabel>Genres</FormLabel>
-                    <FormDescription>
+                    {/* <FormDescription>
                       Select the items you want to display in the sidebar.
-                    </FormDescription>
+                    </FormDescription> */}
                   </div>
                   <span className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     {GENRES.map((item) => (
@@ -300,30 +318,6 @@ export default function ProfileForm() {
                 control={form.control}
                 name="country"
                 render={({ field }) => (
-                  // <FormItem>
-                  //   <FormLabel>Country</FormLabel>
-                  //   <Select
-                  //     onValueChange={field.onChange}
-                  //     defaultValue={field.value}
-                  //   >
-                  //     <FormControl>
-                  //       <SelectTrigger>
-                  //         <SelectValue placeholder="Select a country" />
-                  //       </SelectTrigger>
-                  //     </FormControl>
-                  //     <SelectContent>
-                  //       {COUNTRIES.map((o, i) => (
-                  //         <SelectItem key={i} value={o.value}>
-                  //           {o.label}
-                  //         </SelectItem>
-                  //       ))}
-                  //     </SelectContent>
-                  //   </Select>
-                  //   <FormDescription>
-                  //     {/* You can update the stage of script as you progress. */}
-                  //   </FormDescription>
-                  //   <FormMessage />
-                  // </FormItem>
                   <FormItem className="flex flex-col gap-2.5">
                     <FormLabel>Country</FormLabel>
                     <Popover>
@@ -436,35 +430,6 @@ export default function ProfileForm() {
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name="language"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Language</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select an access of script" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {LANGUAGES.map((o, i) => (
-                          <SelectItem key={i} value={o.value}>
-                            {o.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormDescription>
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
             </div>
             <br />
             <div className="grid grid-cols-2 gap-8 items-start">
@@ -487,9 +452,6 @@ export default function ProfileForm() {
               />
               <Card>
                 <CardHeader>
-                  {/* <CardTitle>
-      How to get Papermark Link for your Script ?
-      </CardTitle> */}
                   <CardDescription>
                     How to get Papermark Link for your Script ?
                   </CardDescription>
@@ -518,24 +480,21 @@ export default function ProfileForm() {
                       &nbsp; on top right corner
                     </li>
                     <li className="flex flex-row items-center">
-                      <span className="font-mono">3.&nbsp;</span>Copy Link to
-                      Clipboard&nbsp;
-                      {/* <Link className="flex flex-row items-center" href="/">
-                        Papermark&nbsp;
-                        <ArrowTopRightIcon />
-                      </Link> */}
+                      <span className="font-mono">3.&nbsp;</span>Upload your PDF
+                      / Script file
+                    </li>
+                    <li className="flex flex-row items-center">
+                      <span className="font-mono">4.&nbsp;</span>Copy Link and
+                      Paste it here
                     </li>
                   </ol>
                 </CardContent>
-                {/* <CardFooter>
-    <p>Card Footer</p>
-  </CardFooter> */}
               </Card>
             </div>
             <br />
-            <Button className="" type="submit">
-              Publish Script
-            </Button>
+            <Button disabled={mutation.isLoading} type="submit">
+          {mutation.isLoading ? "Publishing..." : "Publish"}
+        </Button>
             <br />
             <br />
             <br />
